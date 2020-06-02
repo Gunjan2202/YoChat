@@ -27,7 +27,10 @@ io.on('connection', socket => {
     socket.join(user.room);
 
     // Welcome current user
-    socket.emit('message1', formatMessage(botName, 'Welcome to YoChat!'));
+    socket.emit('message1', formatMessage(botName,'Welcom to YoChat'));
+
+    //Display the name of the user at the top
+    socket.emit('message2', formatMessage(botName,`${user.username}`));
 
     // Broadcast when a user connects
     socket.broadcast

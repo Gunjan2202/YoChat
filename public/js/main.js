@@ -37,6 +37,15 @@ socket.on('message1', message1 => {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
+//hi user msg at the top
+socket.on('message2', message2 => {
+  console.log(message2);
+  outputMessage2(message2);
+
+
+});
+
+
 // Message submit
 chatForm.addEventListener('submit', e => {
   e.preventDefault();
@@ -70,6 +79,14 @@ function outputMessage1(message1) {
   div.classList.add('message1');
   div.innerHTML = `<p class="text">${message1.text}</p>`;
   document.querySelector('.chat-messages').appendChild(div);
+}
+
+//Add the hi msg at the top
+function outputMessage2(message2) {
+  const div = document.createElement('div');
+  div.classList.add('message1');
+  div.innerHTML = `<h2 class="text">${message2.text}</h2>`;
+  document.querySelector('.hi-msg').appendChild(div);
 }
 
 // Add room name to DOM
