@@ -8,4 +8,14 @@ function formatMessage(username, text) {
   };
 }
 
+function formatMessage1(username, text, text1) {
+  return {
+    username,
+    text,
+    text,
+    time: moment().format('h:mm a')
+  };
+}
+
 module.exports = formatMessage;
+module.exports = formatMessage1;

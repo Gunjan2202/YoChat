@@ -14,6 +14,10 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
+
+
+
+
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -50,6 +54,22 @@ io.on('connection', socket => {
   // Listen for chatMessage
   socket.on('chatMessage', msg => {
     const user = getCurrentUser(socket.id);
+    
+
+    //////////////////INtegrating NTRU Python file////////////////////////
+
+    var spawn = require("child_process").spawn; 
+      
+  
+    var process = spawn('python',["./ntru.py",msg] ); 
+  
+    
+    process.stdout.on('data', function(data) { 
+        console.log(data.toString()); 
+    } )
+    //////////////////////////////////////////////////////////
+
+
 
     io.to(user.room).emit('message', formatMessage(user.username, msg));
   });
