@@ -237,7 +237,11 @@ a:hover{
 	}
 
 	.login-content{
-		margin:auto;
-		justify-content: center;
+		
+		margin: auto;
+	    padding: initial;
+	    justify-content: center;
+	    width: 111%;
+	    margin-left: -5%;
 	}
 }
