@@ -2,7 +2,7 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
-const formatMessage = require('./utils/messages');
+const {formatMessage, formatMessage3} = require('./utils/messages');
 const {
   userJoin,
   getCurrentUser,
@@ -22,11 +22,13 @@ const io = socketio(server);
 app.use(express.static(path.join(__dirname, 'public')));
 
 const botName = 'Server';
+var color=["Red","Yellow","Blue","Green"];
+
 
 // Run when client connects
 io.on('connection', socket => {
   socket.on('joinRoom', ({ username, room }) => {
-    const user = userJoin(socket.id, username, room);
+    const user = userJoin(socket.id, username, room, color.pop());
 
     socket.join(user.room);
 
@@ -71,7 +73,7 @@ io.on('connection', socket => {
 
 
 
-    io.to(user.room).emit('message', formatMessage(user.username, msg));
+    io.to(user.room).emit('message', formatMessage3(user.username, msg, user.color));
   });
 
   // Runs when client disconnects

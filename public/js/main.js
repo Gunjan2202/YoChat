@@ -25,7 +25,7 @@ socket.on('roomUsers', ({ room, users }) => {
 
 // Message from server
 socket.on('message', message => {
-  // console.log(message);
+  console.log(message);
   outputMessage(message);
 
   // Scroll down
@@ -69,7 +69,7 @@ chatForm.addEventListener('submit', e => {
 function outputMessage(message) {
   const div = document.createElement('div');
   div.classList.add('message');
-  div.innerHTML = `<p class="meta" id="${message.usercolor}">${message.username}<span>${message.time}</span></p>
+  div.innerHTML = `<p class="meta" id="${message.color}">${message.username}<span>${message.time}</span></p>
   <p class="text">
     ${message.text}
   </p>`;
