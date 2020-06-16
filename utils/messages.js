@@ -6,7 +6,19 @@ function formatMessage(username, text) {
   return {
     username,
     text,
+    time: moment().format('h:mm a')
+    
+
+  };
+
+}
+
+function formatMessage3(username, text, color) {
+  return {
+    username,
+    text,
     time: moment().format('h:mm a'),
+    color
     
 
   };
@@ -14,5 +26,8 @@ function formatMessage(username, text) {
 }
 
 
-module.exports = formatMessage;
+
+module.exports = {formatMessage,formatMessage3} ;
+
+
 

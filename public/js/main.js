@@ -12,6 +12,8 @@ const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true
 });
 
+var person={username, room};
+
 const socket = io();
 
 // Join chatroom
@@ -25,8 +27,18 @@ socket.on('roomUsers', ({ room, users }) => {
 
 // Message from server
 socket.on('message', message => {
-  // console.log(message);
-  outputMessage(message);
+  if(message.username==person.username)
+  {console.log(message);
+    console.log(person.username);
+    outputMessageright(message);
+  }
+  
+  else{
+    console.log(message);
+    console.log(person.username);
+    outputMessage(message);
+
+  }
 
   // Scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -69,7 +81,18 @@ chatForm.addEventListener('submit', e => {
 function outputMessage(message) {
   const div = document.createElement('div');
   div.classList.add('message');
-  div.innerHTML = `<p class="meta" id="${message.usercolor}">${message.username}<span>${message.time}</span></p>
+  div.innerHTML = `<p class="meta" id="${message.color}">${message.username} <span>${message.time}</span></p>
+  <p class="text">
+    ${message.text}
+  </p>`;
+  document.querySelector('.chat-messages').appendChild(div);
+}
+
+// Output message to DOM at the right side of the screen
+function outputMessageright(message) {
+  const div = document.createElement('div');
+  div.classList.add('message2');
+  div.innerHTML = `<p class="meta" style="color:${message.color}">${message.username} <span>${message.time}</span></p>
   <p class="text">
     ${message.text}
   </p>`;
