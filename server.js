@@ -22,7 +22,7 @@ const io = socketio(server);
 app.use(express.static(path.join(__dirname, 'public')));
 
 const botName = 'Server';
-var color=["Red","Yellow","Blue","Green"];
+var color=["Red","Blue","Green","#2d309e","#8926a2","#ff6c0a"];
 
 
 // Run when client connects

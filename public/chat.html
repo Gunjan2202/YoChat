@@ -10,6 +10,12 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.css">
+    <script
+            src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.js"></script>
     <title>YoChat App</title>
   </head>
   <body>
@@ -46,6 +52,23 @@
       </div>
     </div>
   </div>
+  <script src="js/inputEmoji.js"></script>
+  <script type="text/javascript">
+      $("#msg").emoji();
+    </script>
+<!-- <script type="text/javascript">
+$(function () {
+  $('textarea,input').emoji({
+    listCSS: {
+      position: 'absolute', 
+      border: '1px solid gray', 
+      background-color: '#fff', 
+      display: 'none'
+    }
+  });
+})
+</script>
+ -->
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
@@ -54,5 +77,7 @@
     ></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/main.js"></script>
+    
+    
   </body>
 </html>
