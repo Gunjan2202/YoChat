@@ -35,8 +35,8 @@ io.on('connection', socket => {
     // Welcome current user
     socket.emit('message1', formatMessage(botName,'Welcome to YoChat'));
 
-    //Display the name of the user at the top
-    socket.emit('message2', formatMessage(botName,`${user.username}`));
+    // //Display the name of the user at the top
+    // socket.emit('message2', formatMessage(botName,`${user.username}`));
 
     // Broadcast when a user connects
     socket.broadcast
@@ -51,6 +51,11 @@ io.on('connection', socket => {
       room: user.room,
       users: getRoomUsers(user.room)
     });
+  });
+
+  //emit typing message
+  socket.on('usertyping',(data)=>{
+    socket.broadcast.emit('usertyping',data)
   });
 
   // Listen for chatMessage

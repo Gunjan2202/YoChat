@@ -16,6 +16,7 @@
             integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.js"></script>
+   <!--  <script src="https://kit.fontawesome.com/ff10e56d00.js" crossorigin="anonymous"></script> -->
     <title>YoChat App</title>
   </head>
   <body>
@@ -24,10 +25,13 @@
     <img class="wave2" src="img/wave2.png">
     <div class="chat-container">
       <header class="chat-header">
-        <h1 id="chattitle"><i class="fas fa-smile"></i> YoChat</h1>
-        <div class="hi-msg"></div>
+        <h2 id="chattitle"><a href="index.html"><i class="fas fa-arrow-left"></i></a> YoChat</h2>
+        <!-- <div class="hi-msg"></div> -->
+        <div id="mssg"></div>
 
-        <a href="index.html" class="btn">Leave Room</a>
+        <!-- <a href="index.html" class="btn">Leave Room</a> -->
+  
+      
       </header>
       <main class="chat-main">
         <div class="chat-sidebar">
@@ -36,10 +40,14 @@
           <h3><i class="fas fa-users"></i> Users</h3>
           <ul id="users"></ul>
         </div>
-        <div class="chat-messages"></div>
+        <div class="chat-messages">
+          <div class="message1 red"><p class="text">Connecting...</p></div>
+          
+        </div>
       </main>
       <div class="chat-form-container">
         <form id="chat-form">
+
           <input
             id="msg"
             type="text"
