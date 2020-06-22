@@ -27,6 +27,18 @@ ul {
 
 a {
 	text-decoration: none;
+	color:white;
+}
+
+i{
+	padding-right: 5px;
+}
+
+#sent{
+	width: 54px;
+    justify-content: center;
+    text-align: end;
+
 }
 .bgclass{
 	height:90vh;
@@ -166,6 +178,11 @@ a {
 	width: fit-content;
 
 }
+
+.chat-messages .red{
+	background-color: Red;
+
+}
 .chat-messages .message2 {
 	clear:both;
 	padding: 10px;
@@ -185,7 +202,7 @@ a {
 	font-size: 15px;
 	font-weight: bold;
 	opacity: 0.7;
-	margin-bottom: 7px;
+	
 }
 
 #Red{
@@ -216,9 +233,9 @@ a {
 .chat-messages .message .meta span ,
 .chat-messages .message2 .meta span {
 	color: #777;
-	font-size: 13px;
-	float:right;
-	margin-left:5px;
+    font-size: 10px;
+    float: right;
+    margin-left: 10px;
 }
 
 
@@ -238,10 +255,27 @@ a {
 	height: 40px;
 	flex: 1;
 }
+.del{
+	display:none;
+}
 
 
 .list{
 	bottom:20px;
+}
+
+.fa-check-double{
+	
+	font-size: 10px;
+	color:#00b6ff;
+
+}
+
+.fa-check{
+	
+	font-size: 10px;
+	color:#c8c6c6;
+
 }
 
 @media (max-width: 700px) {
