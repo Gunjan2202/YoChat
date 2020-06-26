@@ -13,6 +13,10 @@ const {
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+
+
 
 
 
@@ -25,15 +29,36 @@ const botName = 'Server';
 var color=["Red","Blue","Green","#2d309e","#8926a2","#ff6c0a"];
 
 
-// Run when client connects
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  var messagesCollection;
+
+  
+
+
+  // Run when client connects
 io.on('connection', socket => {
+  
   socket.on('joinRoom', ({ username, room }) => {
-    const user = userJoin(socket.id, username, room, color.pop());
+
+    var user = userJoin(socket.id, username, room, color.pop());
 
     socket.join(user.room);
 
     // Welcome current user
     socket.emit('message1', formatMessage(botName,'Welcome to YoChat'));
+
+    //creating a collection
+    messagesCollection=dbo.collection(user.room);
+    
+
+    // RETIEVE FROM DATABASE
+    messagesCollection.find().toArray(function(err, result) {
+    if (err) throw err;
+    // console.log(result);
+    io.to(socket.id).emit('databasemsg',result);
+    });
 
     // //Display the name of the user at the top
     // socket.emit('message2', formatMessage(botName,`${user.username}`));
@@ -52,6 +77,8 @@ io.on('connection', socket => {
       users: getRoomUsers(user.room)
     });
   });
+
+  
 
   //emit typing message
   socket.on('usertyping',(data)=>{
@@ -75,10 +102,12 @@ io.on('connection', socket => {
         console.log(data.toString()); 
     } )
     //////////////////////////////////////////////////////////
+    
+    messagesCollection.insertOne(formatMessage3(user.username, msg.msg, user.color, msg.flag, msg.tagmsg),function(err,res){
+        console.log('inserted a message to database')
+    });
 
-
-
-    io.to(user.room).emit('message', formatMessage3(user.username, msg, user.color));
+    io.to(user.room).emit('message', formatMessage3(user.username, msg.msg, user.color, msg.flag, msg.tagmsg));
   });
 
   // Runs when client disconnects
@@ -99,6 +128,10 @@ io.on('connection', socket => {
     }
   });
 });
+  
+});
+
+
 
 const PORT = process.env.PORT || 3000;
 
