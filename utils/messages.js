@@ -13,12 +13,14 @@ function formatMessage(username, text) {
 
 }
 
-function formatMessage3(username, text, color) {
+function formatMessage3(username, text, color, flag, tag) {
   return {
     username,
     text,
     time: moment().format('h:mm a'),
-    color
+    color,
+    flag,
+    tag
     
 
   };

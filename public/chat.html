@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
@@ -24,6 +25,24 @@
     <img class="wave" src="img/wave3.jpeg">
     <img class="wave2" src="img/wave2.png">
     <div class="chat-container">
+      <div class="chat-sidebar-main">
+        <header class="chat-header">
+        <h2 id="chattitle"><a href="index.html"><i class="fas fa-arrow-left"></i></a> YoChat</h2>
+        <!-- <div class="hi-msg"></div> -->
+        <div id="mssg"></div>
+
+        <!-- <a href="index.html" class="btn">Leave Room</a> -->
+  
+      
+      </header>
+        <div class="chat-sidebar ">
+          <h3><i class="fas fa-comments"></i> Room Name:</h3>
+          <h2 id="room-name"></h2>
+          <h3><i class="fas fa-users"></i> Users</h3>
+          <ul id="users"></ul>
+        </div>
+      </div>
+      <div id="chat-space">
       <header class="chat-header">
         <h2 id="chattitle"><a href="index.html"><i class="fas fa-arrow-left"></i></a> YoChat</h2>
         <!-- <div class="hi-msg"></div> -->
@@ -34,18 +53,23 @@
       
       </header>
       <main class="chat-main">
-        <div class="chat-sidebar">
+        <!-- <div class="chat-sidebar">
           <h3><i class="fas fa-comments"></i> Room Name:</h3>
           <h2 id="room-name"></h2>
           <h3><i class="fas fa-users"></i> Users</h3>
           <ul id="users"></ul>
-        </div>
+        </div> -->
         <div class="chat-messages">
           <div class="message1 red"><p class="text">Connecting...</p></div>
           
         </div>
       </main>
+      
       <div class="chat-form-container">
+
+        <div class="tag">
+          <p onclick=hide()>x</p>
+        </div>
         <form id="chat-form">
 
           <input
@@ -59,6 +83,7 @@
         </form>
       </div>
     </div>
+  </div>
   </div>
   <script src="js/inputEmoji.js"></script>
   <script type="text/javascript">

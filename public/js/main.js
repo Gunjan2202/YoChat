@@ -3,7 +3,8 @@ const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 const mssg=document.getElementById('msg');
-
+var tagmsg=""; 
+var flag=false;
 
 
 
@@ -55,6 +56,7 @@ socket.on('message', message => {
     $('#x').remove();
     
     });
+
     outputMessageright(message);
   }
   
@@ -64,7 +66,8 @@ socket.on('message', message => {
     outputMessage(message);
 
   }
-
+  //hide the tagging div
+  $('.tag').fadeOut();
   // Scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
@@ -102,6 +105,7 @@ socket.on('databasemsg',result=>{
     outputMessage(result[i]);
   }
   }
+
     // Scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
@@ -114,11 +118,12 @@ chatForm.addEventListener('submit', e => {
   // Get message text
   const msg = e.target.elements.msg.value;
 
+
   //message sent but not delieverd yet
   outputMessagenoconn(msg);
 
   // Emit message to server
-  socket.emit('chatMessage', msg);
+  socket.emit('chatMessage', {msg, flag, tagmsg});
 
   // Clear input
   e.target.elements.msg.value = '';
@@ -144,14 +149,19 @@ function outputtyping(data, div) {
 
 // Output message to DOM
 function outputMessage(message) {
-   
+
+  var unhide;
+  if(message.flag==true)
+    {unhide="unhidetagleft";}
+  else
+    {unhide="tagup";}
   // document.querySelector('.typing').style.display="none";
   const div = document.createElement('div');
   div.classList.add('message');
-  div.innerHTML = `<p class="meta" style="color:${message.color}">${message.username} <span>${message.time}</span></p>
+  div.innerHTML = `<div class=${unhide}>${message.tag}</div><div onclick=msgalert(this.innerHTML) class="messagetag"><p class="meta" style="color:${message.color}">${message.username} <span>${message.time}</span></p>
   <p class="text">
     ${message.text}
-  </p>`;
+  </p></div>`;
   document.querySelector('.chat-messages').appendChild(div);
 }
 
@@ -160,7 +170,7 @@ function outputMessageright(message) {
   // document.querySelector('.typing').style.display="none";
   const div = document.createElement('div');
   div.classList.add('message2');
-  div.innerHTML = `<p class="meta text"><span class="span">${message.time} <i class="fas fa-check-double"></i></span><span class="righttext">${message.text}</span> </p>`;
+  div.innerHTML = `<p class="meta text" onclick=msgalert(this.innerHTML)><span class="span">${message.time} <i class="fas fa-check-double"></i></span><span class="righttext">${message.text}</span> </p>`;
   document.querySelector('.chat-messages').appendChild(div);
 }
 
@@ -171,7 +181,7 @@ function outputMessagenoconn(message) {
   const div = document.createElement('div');
   div.classList.add('message2');
    div.id="x";
-  div.innerHTML = `<p class="meta text"><span id="sent"> sent <i class="fas fa-check"></i></span>${message} </p>`;
+  div.innerHTML = `<p class="meta text" ><span id="sent"> sent <i class="fas fa-check"></i></span>${message} </p>`;
   document.querySelector('.chat-messages').appendChild(div);
   
 }
@@ -206,3 +216,48 @@ function outputUsers(users) {
   `;
 }
 
+
+//tagging facility
+    $('.message1').click(function() {  
+      alert("hello");
+    });
+    // alert("Hello! I am an alert box!!");
+   
+function msgalert(msg){
+  eselect=document.querySelector('.tag');
+  // eselect.style.opacity="1";
+  $('.tag').fadeIn();
+  $('input').focus();
+  flag=true;
+  eselect.innerHTML="<p onclick=hide() class='cross'>x</p>"+msg;
+  tagmsg=msg;
+
+}
+
+//send tagged msg
+function outputMessageright(message) {
+  var unhide;
+  // document.querySelector('.typing').style.display="none";
+  const div = document.createElement('div');
+  div.classList.add('message2');
+  if(message.flag==true)
+    {unhide="unhidetag";}
+  else
+    {unhide="tagup";}
+
+  div.innerHTML = `<div class=${unhide}>${message.tag}</div><div class="messagetag"><p class="meta text" onclick=msgalert(this.innerHTML)><span id="yourname" style="color:${message.color};">${message.username}</span>
+  <span class="span">${message.time} <i class="fas fa-check-double"></i></span><span class="righttext">${message.text}</span> </p><div>`;
+  document.querySelector('.chat-messages').appendChild(div);
+  
+  
+  flag=false;
+}
+
+function hide(){
+  $('.tag').fadeOut();
+}
+
+
+
+// var element = document.querySelector(".message2"); //grab the element
+// element.onclick = alert("Hello! I am an alert box!!");

@@ -103,11 +103,11 @@ io.on('connection', socket => {
     } )
     //////////////////////////////////////////////////////////
     
-    messagesCollection.insertOne(formatMessage3(user.username, msg, user.color),function(err,res){
+    messagesCollection.insertOne(formatMessage3(user.username, msg.msg, user.color, msg.flag, msg.tagmsg),function(err,res){
         console.log('inserted a message to database')
     });
 
-    io.to(user.room).emit('message', formatMessage3(user.username, msg, user.color));
+    io.to(user.room).emit('message', formatMessage3(user.username, msg.msg, user.color, msg.flag, msg.tagmsg));
   });
 
   // Runs when client disconnects
