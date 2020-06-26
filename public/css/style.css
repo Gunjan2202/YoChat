@@ -16,7 +16,7 @@
 
 body {
 	font-family: 'Roboto', sans-serif;
-	font-size: 16px;
+	font-size: 15px;
 	
 	margin: 20px;
 }
@@ -73,7 +73,7 @@ i{
 	
 }*/
 .btn{
-	display: block;
+	/*display: block;
 	padding: 5px 15px;
 	border-radius: 10px;
 	outline: none;
@@ -86,8 +86,23 @@ i{
 	text-transform: uppercase;
 
 	cursor: pointer;
+	transition: .5s;*/
+	display:block;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  outline: none;
+	border: none;
+	background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+	background-size: 200%;
+	color: #fff;
+	
+	text-transform: uppercase;
+
+	cursor: pointer;
 	transition: .5s;
 }
+  
 .btn:hover{
 	background-position: right;
 }
@@ -204,6 +219,10 @@ i{
 	opacity: 0.7;
 	
 }
+#rightmsgtext{
+	font-weight: normal;
+	opacity: 1;
+}
 
 #Red{
 	color: Red;
@@ -226,18 +245,23 @@ i{
 	color:white;
 }
 #msg{
-	border-radius: 7px;
+	border-radius: 50px;
+	outline:none;
 }
 
 
 .chat-messages .message .meta span ,
-.chat-messages .message2 .meta span {
+.chat-messages .message2 .meta .span {
 	color: #777;
     font-size: 10px;
     float: right;
     margin-left: 10px;
 }
 
+.righttext{
+	font-weight: normal;
+	opacity: 1;
+}
 
 
 .chat-form-container {
@@ -251,7 +275,7 @@ i{
 
 .chat-form-container input[type='text'] {
 	font-size: 16px;
-	padding: 5px;
+	padding: 10px;
 	height: 40px;
 	flex: 1;
 }
@@ -318,7 +342,7 @@ i{
 		position: fixed;
 	    bottom: 0px;
 	    width: 100%;
-	    border-radius: 15px 15px 15px 15px;
+	    border-radius: 30px;
 
 	}
 

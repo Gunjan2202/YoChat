@@ -87,7 +87,25 @@ socket.on('message1', message1 => {
 
 // });
 
+//listen to msgs retrieved from database
+socket.on('databasemsg',result=>{
+  const n=Object.keys(result).length
+  console.log(n);
+  console.log(result[i]);
+  for(var i=0;i<n;i++)
+  {
+  if(result[i].username==person.username)
+  {
+    outputMessageright(result[i]); 
+  }
+  else{
+    outputMessage(result[i]);
+  }
+  }
+    // Scroll down
+  chatMessages.scrollTop = chatMessages.scrollHeight;
 
+})
 
 // Message submit
 chatForm.addEventListener('submit', e => {
@@ -142,7 +160,7 @@ function outputMessageright(message) {
   // document.querySelector('.typing').style.display="none";
   const div = document.createElement('div');
   div.classList.add('message2');
-  div.innerHTML = `<p class="meta text"><span>${message.time} <i class="fas fa-check-double"></i></span>${message.text} </p>`;
+  div.innerHTML = `<p class="meta text"><span class="span">${message.time} <i class="fas fa-check-double"></i></span><span class="righttext">${message.text}</span> </p>`;
   document.querySelector('.chat-messages').appendChild(div);
 }
 
